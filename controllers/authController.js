@@ -34,7 +34,7 @@ class authController {
         token: user.token,
       });
     } catch (err) {
-      next(err); // keep consistent
+      next(err); 
     }
   }
 

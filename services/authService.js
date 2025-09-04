@@ -3,9 +3,11 @@ import ErrorHandler from '../utils/ErrorHandler.js';
 import generateToken from '../utils/genrateToken.js';
 import sendEmail from '../utils/EmailSender.js';
 import bcrypt from 'bcryptjs';
+import validatin from '../validation/authV.js';
 
 class AuthService {
   async signup(name, email, imageURL, phone,imagePublicId, password,birthDay) {
+    validatin.validatin(name,email,password)
    
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -53,7 +55,6 @@ class AuthService {
     return {
       user,
       activationCode,
-     
     };
   }
 
@@ -78,6 +79,7 @@ return {
   user, token
 }
   }
+  
   async login(email,password){
     const user=await  User.findOne({email});
     if(!user)
